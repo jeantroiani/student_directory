@@ -10,7 +10,7 @@ end
 def my_print(students)
 	puts "Which cohort do you want to see?"
 	cohortSelected = gets.delete!("\n")
-	
+
 	 
 	 cohortStudents=[]
 		 students.map.with_index do |month, index| 
@@ -34,6 +34,9 @@ def print_footer(names)
 	print"Overall we have #{names.length} great students\n".center(100)
 end
 
+# def no_students
+# 	puts "Sorry there  are no students enrolled"
+# end
 
 def input_students
 	puts "Please enter the names of the students"
@@ -42,44 +45,16 @@ def input_students
 	students = []
 	
 	name = gets.delete!("\n")
+	if name.empty?
+			puts "Sorry there  are no students enrolled"
+			exit
+	end
 	
-	
+
 	puts "Please provide your cohort, if your cohort is not June"
 	cohort=gets.delete!("\n")
-	
-	
-	if !cohort.empty? 
-		cohort=cohort
-	else
-		cohort="June"
-		
-	end
 
-	puts "Please enter the hobby of the students"
-	hobby = gets.delete!("\n")
 	
-	
-
-	puts "Please enter the country of the students"
-	country= gets.delete!("\n")
-	
-	puts "Please enter the height of the students"
-	height = gets.delete!("\n")
-	
-	while !name.empty? do
-		students << {name: name , cohort: cohort, hobby: hobby, country: country, height: height }
-		if students.count == 1
-			puts "Now we have #{students.length} student"
-		else
-			puts "Now we have #{students.length} students"
-		end
-		puts "Please enter the names of the students"
-		name = gets.delete!("\n")
-		
-		if !name.empty?
-			puts "Please provide your cohort, if your cohort is not June"
-		cohort=gets.delete!("\n")
-		
 		if !cohort.empty? 
 			cohort=cohort
 		else
@@ -87,16 +62,48 @@ def input_students
 			
 		end
 
-			puts "Please enter the hobby of the students"
-			hobby = gets.delete!("\n")
-			
-			puts "Please enter the country of the students"
-			country= gets.delete!("\n")
-			
-			puts "Please enter the height of the students"
-			height = gets.delete!("\n")
-			
-		end
+	puts "Please enter the hobby of the students"
+	hobby = gets.delete!("\n")
+
+	
+
+	puts "Please enter the country of the students"
+	country= gets.delete!("\n")
+
+	puts "Please enter the height of the students"
+	height = gets.delete!("\n")
+
+		while !name.empty? do
+			students << {name: name , cohort: cohort, hobby: hobby, country: country, height: height }
+			if students.count == 1
+				puts "Now we have #{students.length} student"
+			else
+				puts "Now we have #{students.length} students"
+			end
+			puts "Please enter the names of the students"
+			name = gets.delete!("\n")
+
+			if !name.empty?
+				puts "Please provide your cohort, if your cohort is not June"
+			cohort=gets.delete!("\n")
+
+			if !cohort.empty? 
+				cohort=cohort
+			else
+				cohort="June"
+				
+			end
+
+				puts "Please enter the hobby of the students"
+				hobby = gets.delete!("\n")
+
+				puts "Please enter the country of the students"
+				country= gets.delete!("\n")
+
+				puts "Please enter the height of the students"
+				height = gets.delete!("\n")
+
+			end
 	end
 	 students
 
