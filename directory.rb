@@ -1,36 +1,43 @@
 
 def interactive_menu
 	loop do
-	#print the menu and ask the user what to do
-		puts "1. Input the students"
-		puts "2. Show the students"
-		puts "9. Exit"
-	#read the user's inout and save it into a variablr
-		selection = gets.chomp
+	print_menu
+		#read the user's inout and save it into a variable
+		process(gets.chomp)
+		
+	end
+end
+
+def process(selection)
 	#perform the action the user asked for
-		case selection
+	case selection
 		when "1"
-			#input the students"
+			
 			input_students
 			
 		when "2"
-			#show the students"
-				print_header
-				my_print($students)
-				
-				print_footer($students)
-
-
-
-
+			
+				show_students
 		when "9"
 			exit
 		else
 			puts "I don't know what you meant, try again."
 		end
-	end
 end
 
+def print_menu
+	#input the students"
+	puts "1. Input the students"
+	puts "2. Show the students"
+	puts "9. Exit"
+end
+
+def show_students
+	#show the students"
+	print_header
+	print_students_list
+	print_footer
+end
 
 def print_header
 # and then print them
@@ -39,16 +46,16 @@ def print_header
 end
 
 
-def my_print(students)
+def print_students_list
 	
 	puts "Which cohort do you want to see?"
 	cohortSelected = gets.delete!("\n")
 
 	 
 	 cohortStudents=[]
-		 students.map.with_index do |month, index| 
-		 	if students[index][:cohort] == cohortSelected
-		 		cohortStudents<< students[index]
+		 @students.map.with_index do |month, index| 
+		 	if @students[index][:cohort] == cohortSelected
+		 		cohortStudents<< @students[index]
 		 	 end
 
 		end
@@ -63,8 +70,8 @@ def my_print(students)
 end
 	 
 
-def print_footer(names)
-	print"Overall we have #{names.length} great students\n".center(100)
+def print_footer
+	print"Overall we have #{@students.length} great students\n".center(100)
 end
 
 
@@ -136,8 +143,8 @@ def input_students
 
 			end
 	end
-	 students
-     $students=students
+	
+     @students = students
 end
 
 
