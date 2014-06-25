@@ -8,9 +8,22 @@ end
 
 
 def my_print(students)
+	puts "Which cohort do you want to see?"
+	cohortSelected = gets.chomp
+	 
+	 cohortStudents=[]
+		 students.map.with_index do |month, index| 
+		 	if students[index][:cohort] == cohortSelected
+		 		cohortStudents<< students[index]
+		 	 end
+
+		end
+
+
 	 counter = 0
-	 while counter < students.count
-	 puts  "#{counter+1} #{students[counter][:name].ljust(12) }| #{students[counter][:cohort].ljust(19)} cohort | #{students[counter][:hobby].ljust(26)} | #{students[counter][:country].ljust(36)} | #{students[counter][:height].ljust(46)}"
+	 while counter < cohortStudents.count
+	 puts  "#{counter+1} #{cohortStudents[counter][:name].ljust(12) }| #{cohortStudents[counter][:cohort].ljust(19)} cohort | 
+	 #{cohortStudents[counter][:hobby].ljust(26)} | #{cohortStudents[counter][:country].ljust(36)} | #{cohortStudents[counter][:height].ljust(46)}"
 	 counter += 1
 	end
 end
@@ -30,7 +43,7 @@ def input_students
 	name = gets.chomp
 	
 	puts "Please provide your cohort, if your cohort is not June"
-	cohort=gets.chomp.capitalize!
+	cohort=gets.chomp
 	
 	if !cohort.empty? 
 		cohort=cohort
@@ -80,9 +93,11 @@ end
 students = input_students
 
 
- print_header
+print_header
+
 
 my_print(students)
+
 
 print_footer(students)
 
