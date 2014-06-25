@@ -2,22 +2,22 @@
 
 def print_header
 # and then print them
-	print "The students of my cohort at Makers Academy\n"
-	print "-------------\n"
+	puts "The students of my cohort at Makers Academy".center(100)
+	puts"-------------".center(100)
 end
 
 
 def my_print(students)
 	 counter = 0
 	 while counter < students.count
-	 puts  "#{counter+1} #{students[counter][:name]} | #{students[counter][:cohort]} cohort | #{students[counter][:hobby]} | #{students[counter][:country]} | #{students[counter][:height]}"
+	 puts  "#{counter+1} #{students[counter][:name].ljust(12) }| #{students[counter][:cohort]} cohort | #{students[counter][:hobby].ljust(24)} | #{students[counter][:country].ljust(36)} | #{students[counter][:height].ljust(46)}"
 	 counter += 1
 	end
 end
 	 
 
 def print_footer(names)
-	print"Overall we have #{names.length} great students\n"
+	print"Overall we have #{names.length} great students\n".center(100)
 end
 
 
@@ -58,7 +58,7 @@ end
 students = input_students
 
 
-print_header
+ print_header
 
 my_print(students)
 
