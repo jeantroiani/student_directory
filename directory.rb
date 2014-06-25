@@ -1,4 +1,36 @@
 
+def interactive_menu
+	loop do
+	#print the menu and ask the user what to do
+		puts "1. Input the students"
+		puts "2. Show the students"
+		puts "9. Exit"
+	#read the user's inout and save it into a variablr
+		selection = gets.chomp
+	#perform the action the user asked for
+		case selection
+		when "1"
+			#input the students"
+			input_students
+			
+		when "2"
+			#show the students"
+				print_header
+				my_print($students)
+				
+				print_footer($students)
+
+
+
+
+		when "9"
+			exit
+		else
+			puts "I don't know what you meant, try again."
+		end
+	end
+end
+
 
 def print_header
 # and then print them
@@ -8,6 +40,7 @@ end
 
 
 def my_print(students)
+	
 	puts "Which cohort do you want to see?"
 	cohortSelected = gets.delete!("\n")
 
@@ -34,9 +67,7 @@ def print_footer(names)
 	print"Overall we have #{names.length} great students\n".center(100)
 end
 
-# def no_students
-# 	puts "Sorry there  are no students enrolled"
-# end
+
 
 def input_students
 	puts "Please enter the names of the students"
@@ -106,20 +137,14 @@ def input_students
 			end
 	end
 	 students
-
+     $students=students
 end
 
 
 
 
-students = input_students
 
 
-print_header
+interactive_menu
 
-
-my_print(students)
-
-
-print_footer(students)
 
