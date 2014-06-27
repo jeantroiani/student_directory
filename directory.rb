@@ -2,7 +2,7 @@
 
 def question
 
-	print "==>"
+	print "=>"
 	STDIN.gets.chomp
 end
 
@@ -24,8 +24,6 @@ def process(selection)
 	case selection
 		when "1"
 				input_students
-				
-	
 		when "2"		
 				show_students
 		when "3"
@@ -45,24 +43,26 @@ end
 
 def print_menu
 	#input the students"
+	puts ""
 	puts "1. Input the students"
 	puts "2. Show the students"
 	puts "3. Save the list to students.csv"
 	puts "4. Load students"
 	puts "9. Exit"
+	puts ""
 end
 
 def show_students
 	#show the students"
-	print_header
+	
 	print_students_list
 	print_footer
 end
 
 def print_header
 # and then print them
-	puts "The students of my cohort at Makers Academy".center(100)
-	puts"-------------".center(100)
+	puts "The students of my cohort at Makers Academy".center(50)
+	puts"-------------".center(50)
 end
 
 
@@ -78,6 +78,7 @@ def print_students_list
 	puts "Which cohort do you want to see?"
 	cohortSelected = question
 
+print_header
 	 
 	 cohortStudents=[]
 		 @students.map.with_index do |month, index| 
@@ -97,7 +98,7 @@ end
 	 
 
 def print_footer
-	print"Overall we have #{@students.length} great students\n".center(100)
+	puts"Overall we have #{@students.length} great students".center(50)
 end
 
 
@@ -203,16 +204,34 @@ end
 	
 # end
 
-def load_students(filename = "students.csv")
+def load_students
+	puts "which file do you want to open?"
+	user_answer = question
+	return if user_answer.nil?
 	
-	File.open("students.csv" ,"r").readlines.each do |line|
-	name, cohort =	line.chomp.split(',')
-	save_list(name, cohort)	
-	end		
-	puts "File Loaded"	
+	if File.exists? (user_answer)
+		File.open(user_answer ,"r").readlines.each do |line|
+		name, cohort =	line.chomp.split(',')
+		save_list(name, cohort)	
+		end		
+		puts "\n=> File Loaded"	
+	else
+		puts "That file doesn't exist"
+	return	
+	end
 end
 
-
+# def load_students(filename = "students.csv")
+# 	puts "which file do you want to open?"
+# 	question
+# 	return if question.nil?
+# 	if question.exists?
+# 	File.open("students.csv" ,"r").readlines.each do |line|
+# 	name, cohort =	line.chomp.split(',')
+# 	save_list(name, cohort)	
+# 	end		
+# 	puts "File Loaded"	
+# end
 
 
 
