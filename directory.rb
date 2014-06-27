@@ -1,5 +1,5 @@
 @students=[]
-
+require 'csv'
 def question
 
 	print "=>"
@@ -188,20 +188,23 @@ def save_students
 	file.close
 end
 
-#Ask Someone and see if this is OK?
 
-# def load_students(filename = "students.csv")
+
+# def load_students
+# 	puts "which file do you want to open?"
+# 	user_answer = question
+# 	return if user_answer.nil?
 	
-# 	file = File.open("students.csv" ,"r")
-# 	file.readlines.each do |line|
-# 	name, cohort =	line.chomp.split(',')
-	
-# 	save_list(name, cohort)
-	
+# 	if File.exists? (user_answer)
+# 		File.open(user_answer ,"r").readlines.each do |line|
+# 		name, cohort =	line.chomp.split(',')
+# 		save_list(name, cohort)	
+# 		end		
+# 		puts "\n=> File Loaded"	
+# 	else
+# 		puts "That file doesn't exist"
+# 	return	
 # 	end
-# 	puts "File Loaded"
-# 	file.close
-	
 # end
 
 def load_students
@@ -210,9 +213,17 @@ def load_students
 	return if user_answer.nil?
 	
 	if File.exists? (user_answer)
-		File.open(user_answer ,"r").readlines.each do |line|
-		name, cohort =	line.chomp.split(',')
-		save_list(name, cohort)	
+		CSV.foreach(user_answer) do |row|
+			name,cohort = row[0],row[1]
+			save_list(name, cohort)
+
+
+
+			# puts "Name: #{row[0]}, Cohort: #{row[1]}"
+
+		# File.open(user_answer ,"r").readlines.each do |line|
+		# name, cohort =	line.chomp.split(',')
+		# save_list(name, cohort)	
 		end		
 		puts "\n=> File Loaded"	
 	else
@@ -220,19 +231,6 @@ def load_students
 	return	
 	end
 end
-
-# def load_students(filename = "students.csv")
-# 	puts "which file do you want to open?"
-# 	question
-# 	return if question.nil?
-# 	if question.exists?
-# 	File.open("students.csv" ,"r").readlines.each do |line|
-# 	name, cohort =	line.chomp.split(',')
-# 	save_list(name, cohort)	
-# 	end		
-# 	puts "File Loaded"	
-# end
-
 
 
 def try_load_students
