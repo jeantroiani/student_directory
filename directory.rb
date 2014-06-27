@@ -187,20 +187,30 @@ def save_students
 	file.close
 end
 
+#Ask Someone and see if this is OK?
+
+# def load_students(filename = "students.csv")
+	
+# 	file = File.open("students.csv" ,"r")
+# 	file.readlines.each do |line|
+# 	name, cohort =	line.chomp.split(',')
+	
+# 	save_list(name, cohort)
+	
+# 	end
+# 	puts "File Loaded"
+# 	file.close
+	
+# end
+
 def load_students(filename = "students.csv")
 	
-	file = File.open("students.csv" ,"r")
-	file.readlines.each do |line|
+	File.open("students.csv" ,"r").readlines.each do |line|
 	name, cohort =	line.chomp.split(',')
-	
-	save_list(name, cohort)
-	
-	end
-	puts "File Loaded"
-	file.close
-	
+	save_list(name, cohort)	
+	end		
+	puts "File Loaded"	
 end
-
 
 
 
