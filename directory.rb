@@ -1,7 +1,8 @@
 @students=[]
 require 'csv'
-def question
 
+
+def question
 	print "=>"
 	STDIN.gets.chomp
 end
@@ -12,15 +13,12 @@ end
 
 def interactive_menu
 	loop do
-	print_menu
-		#read the user's inout and save it into a variable
-		process(question)
-		
+		print_menu
+		process(question)		
 	end
 end
 
 def process(selection)
-	#perform the action the user asked for
 	case selection
 		when "1"
 				input_students
@@ -30,10 +28,6 @@ def process(selection)
 				save_students
 		when "4"
 				load_students
-
-		# when "5"
-		# 		load_by_month
-
 		when "9"
 			exit
 		else
@@ -42,7 +36,6 @@ def process(selection)
 end
 
 def print_menu
-	#input the students"
 	puts ""
 	puts "1. Input the students"
 	puts "2. Show the students"
@@ -53,94 +46,54 @@ def print_menu
 end
 
 def show_students
-	#show the students"
-	
 	print_students_list
 	print_footer
 end
 
 def print_header
-# and then print them
 	puts "The students of my cohort at Makers Academy".center(50)
 	puts"-------------".center(50)
 end
 
-
-# def load_by_month
-# 	puts "Which cohort do you want to see?"
-# 	cohortSelected = question
-
-# end
-
-
-def print_students_list
-	
+def print_students_list	
 	puts "Which cohort do you want to see?"
 	cohortSelected = question
-
-print_header
-	 
-	 cohortStudents=[]
-		 @students.map.with_index do |month, index| 
-		 	if @students[index][:cohort] == cohortSelected
-		 		cohortStudents<< @students[index]
-		 	 end
-
+	print_header	 
+	cohortStudents=[]
+	@students.map.with_index do |month,index| 
+		if @students[index][:cohort] == cohortSelected
+			cohortStudents<< @students[index]
 		end
-
-
-	 counter = 0
-	 while counter < cohortStudents.count
+	end
+	counter = 0
+	while counter < cohortStudents.count
 	 puts  "#{counter+1} #{cohortStudents[counter][:name].ljust(12) }| #{cohortStudents[counter][:cohort].ljust(19)}"
 	 counter += 1
 	end
 end
 	 
-
 def print_footer
 	puts"Overall we have #{@students.length} great students".center(50)
 end
 
-
-
 def input_students
-	
-	# students = []
 	puts "Please enter the names of the students"
-	puts"To finish, just hit return twice"
-	
+	puts"To finish, just hit return twice"	
 	name = question
 	if name.empty?
-			puts "Sorry there  are no students enrolled"
-			exit
-	end
-	
-
+		puts "Sorry there are no students enrolled"
+		exit
+	end	
 	puts "Please provide your cohort, if your cohort is not June"
 	cohort=question
-
-	
 		if !cohort.empty? 
 			cohort=cohort
 		else
-			cohort="June"
-			
+			cohort="June"			
 		end
-
-	# puts "Please enter the hobby of the students"
-	# hobby = question
-
-	
-
-	# puts "Please enter the country of the students"
-	# country= question
-
-	# puts "Please enter the height of the students"
-	# height = question
 
 		while !name.empty? do
 			save_list(name, cohort)
-			# @students << {name: name , cohort: cohort, hobby: hobby, country: country, height: height }
 			if @students.count == 1
 				puts "Now we have #{@students.length} student"
 			else
@@ -153,28 +106,15 @@ def input_students
 				puts "Please provide your cohort, if your cohort is not June"
 			cohort=question
 
-			if !cohort.empty? 
-				cohort=cohort
-			else
-				cohort="June"
-				
+				if !cohort.empty? 
+					cohort=cohort
+				else
+					cohort="June"
+					
+				end
 			end
-
-				# puts "Please enter the hobby of the students"
-				# hobby = question
-
-				# puts "Please enter the country of the students"
-				# country= question
-				# puts "Please enter the height of the students"
-				# height = question
-
-			end
-	end
-	
-     # @students = students
+	end	
 end
-
-
 
 def save_students
 	file = File.open("students.csv","w")
@@ -182,48 +122,20 @@ def save_students
 		student_data= [student[:name], student[:cohort]]
 		csv_line = student_data.join(",")
 		file.puts csv_line
-	
 	end
 	puts "your file have been saved"
 	file.close
 end
 
-
-
-# def load_students
-# 	puts "which file do you want to open?"
-# 	user_answer = question
-# 	return if user_answer.nil?
-	
-# 	if File.exists? (user_answer)
-# 		File.open(user_answer ,"r").readlines.each do |line|
-# 		name, cohort =	line.chomp.split(',')
-# 		save_list(name, cohort)	
-# 		end		
-# 		puts "\n=> File Loaded"	
-# 	else
-# 		puts "That file doesn't exist"
-# 	return	
-# 	end
-# end
-
 def load_students
 	puts "which file do you want to open?"
 	user_answer = question
 	return if user_answer.nil?
-	
 	if File.exists? (user_answer)
 		CSV.foreach(user_answer) do |row|
 			name,cohort = row[0],row[1]
 			save_list(name, cohort)
 
-
-
-			# puts "Name: #{row[0]}, Cohort: #{row[1]}"
-
-		# File.open(user_answer ,"r").readlines.each do |line|
-		# name, cohort =	line.chomp.split(',')
-		# save_list(name, cohort)	
 		end		
 		puts "\n=> File Loaded"	
 	else
@@ -232,20 +144,16 @@ def load_students
 	end
 end
 
-
 def try_load_students
 	filename = ARGV.first
 	return if filename.nil?
-
 	if File.exists? (filename)
 		load_students(filename)
 		puts "Loaded #{@students.length} from #{filename}"
 	else
 		puts "Sorry, #{filename} doesn't exist"
 	end
-
 end
-
 
 try_load_students
 interactive_menu
